@@ -1,14 +1,3 @@
-resource "random_password" "password" {
-  for_each         = { for v in concat(var.owners, var.users) : v.name => v if v.password == null }
-  length           = 16
-  special          = true
-  min_lower        = 1
-  min_numeric      = 1
-  min_special      = 1
-  min_upper        = 1
-  override_special = "-_()[]{}!%^"
-}
-
 # PostgreSQL databases owners
 resource "yandex_mdb_postgresql_user" "owner" {
   for_each = length(var.owners) > 0 ? { for owner in var.owners : owner.name => owner } : {}
