@@ -4,7 +4,7 @@ resource "yandex_mdb_postgresql_user" "owner" {
 
   cluster_id          = yandex_mdb_postgresql_cluster.this.id
   name                = each.value.name
-  password            = each.value.password == null ? random_password.password[each.value.name].result : each.value.password
+  password            = each.value.password == null
   grants              = each.value.grants
   login               = each.value.login
   conn_limit          = each.value.conn_limit
@@ -18,7 +18,7 @@ resource "yandex_mdb_postgresql_user" "user" {
 
   cluster_id          = yandex_mdb_postgresql_cluster.this.id
   name                = each.value.name
-  password            = each.value.password == null ? random_password.password[each.value.name].result : each.value.password
+  password            = each.value.password == null
   grants              = each.value.grants
   login               = each.value.login
   conn_limit          = each.value.conn_limit
